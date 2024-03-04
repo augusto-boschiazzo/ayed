@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;Grafos&apos; to &apos;grafos&apos;&#x0A;- Original project: &apos;practica6&apos;&#x0A;- Original element: &apos;practica6/src/Grafos&apos;&#x0A;- Renamed element: &apos;practica6/src/grafos&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;Grafos&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;Grafos" name="grafos" qualified="false" references="true" stamp="1700424318260" textual="false" version="1.0"/>
+</session>

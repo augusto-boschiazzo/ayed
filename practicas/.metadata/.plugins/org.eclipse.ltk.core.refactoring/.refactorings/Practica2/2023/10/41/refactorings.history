@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Listas.ListaGenericaEnlazada.combinarConLista(...)&apos; to &apos;combinarConListaEnlazada&apos;&#x0A;- Original project: &apos;Practica2&apos;&#x0A;- Original element: &apos;Listas.ListaGenericaEnlazada.combinarConLista(...)&apos;&#x0A;- Renamed element: &apos;Listas.ListaGenericaEnlazada.combinarConListaEnlazada(...)&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;combinarConLista&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;Listas{ListaGenericaEnlazada.java[ListaGenericaEnlazada~combinarConLista~QListaGenerica\&lt;QT;&gt;;" name="combinarConListaEnlazada" references="true" stamp="1696606313482" version="1.0"/>
+</session>

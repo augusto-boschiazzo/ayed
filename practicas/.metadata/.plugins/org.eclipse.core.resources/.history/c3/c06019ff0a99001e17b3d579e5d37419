@@ -1,0 +1,63 @@
+package practica;
+
+import tp06.*;
+import tp02.*;
+
+public class Punto5 {
+	private GrafoImplListAdy<String> mapaCiudades;
+	
+	public Punto5(GrafoImplListAdy<String> mapaCiudades) {
+		this.mapaCiudades = mapaCiudades;
+	}
+	
+	public ListaGenerica<String> devolverCamino(String ciudad1, String ciudad2) {
+		boolean[] marca = new boolean[mapaCiudades.listaDeVertices().tamanio() +1];
+		ListaGenerica<String> lista = new ListaEnlazadaGenerica<String>();
+		ListaGenerica<String> camino = new ListaEnlazadaGenerica<String>();
+			ListaGenerica<Vertice<String>> aux = mapaCiudades.listaDeVertices();
+			aux.comenzar();
+			Vertice<String> vertice;
+			boolean ok = false;
+			int i = -1;
+			
+		while(!aux.fin() && !ok) {
+			vertice = aux.proximo();
+			if (vertice.dato() == ciudad1) {
+				ok = true;
+				i = vertice.getPosicion();
+				lista.agregarFinal(vertice.dato());
+			}
+		}
+		
+		if (i != -1) {
+			dfs(i, marca, lista, camino, ciudad2);
+		}
+		
+		System.out.println(camino.incluye(ciudad2));
+		return camino;
+	}
+	
+	public void dfs(int i, boolean[] marca, ListaGenerica<String> lista, ListaGenerica<String> camino, String ciudad2) {
+		marca[i] = true;
+		Vertice<String> v = mapaCiudades.listaDeVertices().elemento(i);
+		System.out.println(v.dato());
+		if(v.dato() == ciudad2) {
+			camino = lista.clonar();
+		}
+		if (camino.esVacia()) {
+				ListaGenerica<Arista<String>> ady = mapaCiudades.listaDeAdyacentes(v);
+				ady.comenzar();
+				while (!ady.fin() && camino.esVacia()) {
+					Vertice<String> destino = ady.proximo().verticeDestino();
+					int j = destino.getPosicion();
+					if (!marca[j]) {
+						lista.agregarFinal(destino.dato());
+						dfs(j, marca, lista, camino, ciudad2);
+						lista.eliminarEn(lista.tamanio());
+					}
+				}
+		}
+	}
+	
+	
+}

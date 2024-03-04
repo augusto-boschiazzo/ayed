@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;punto1.incisoA&apos; to &apos;ppal&apos;&#x0A;- Original project: &apos;Practica1B&apos;&#x0A;- Original element: &apos;punto1.incisoA&apos;&#x0A;- Renamed element: &apos;punto1.ppal&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;incisoA&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;punto1{incisoA.java[incisoA" matchStrategy="1" name="ppal" qualified="false" references="true" similarDeclarations="false" stamp="1693784813345" textual="false" version="1.0"/>
+</session>
