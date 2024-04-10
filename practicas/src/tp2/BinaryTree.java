@@ -1,9 +1,9 @@
 package tp2;
 
 public class BinaryTree<T> {
-	T data;
-	BinaryTree<T> leftChild;
-	BinaryTree<T> rightChild;
+	private T data;
+	private BinaryTree<T> leftChild;
+	private BinaryTree<T> rightChild;
 	
 	public BinaryTree(T data) {
 		this.data = data;
@@ -73,7 +73,48 @@ public class BinaryTree<T> {
 		return aux;
 	}
 	
+	public BinaryTree<T> espejo() {
+		if (!this.isEmpty()) {
+			BinaryTree<T> nuevo = new BinaryTree<T>(this.getData());
+			if (this.hasLeftChild()) {
+				nuevo.addRightChild(this.leftChild.espejo());
+			}
+			if (this.hasRightChild()) {
+				nuevo.addLeftChild(this.rightChild.espejo());
+			}
+			return nuevo;
+		}
+		return null;
+	}
 	
+	public void entreNiveles(int n, int m) {
+		Queue<BinaryTree<T>> cola = new Queue<BinaryTree<T>>();
+		cola.enqueue(this);
+		cola.enqueue(null);
+		BinaryTree<T> aux;
+		int nivel = 0;
+		while(!cola.isEmpty() && nivel <= m) {
+			aux = cola.dequeue();
+			if(aux != null) {
+				if (nivel >= n && nivel <= m)
+					System.out.println(aux.data.toString());
+				if(aux.hasLeftChild()) {
+					cola.enqueue(aux.leftChild);
+				}
+				if(aux.hasRightChild()) {
+					cola.enqueue(aux.rightChild);
+				}
+			}
+			else {
+				cola.enqueue(null);
+				nivel++;
+			}
+		}
+	}
+	
+	public void setData(T e) {
+		data = e;
+	}
 	
 	
 }
