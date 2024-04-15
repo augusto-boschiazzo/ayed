@@ -40,7 +40,7 @@ public class BinaryTree<T> {
 	}
 	
 	public boolean isEmpty() {
-		return this.data != null;
+		return this.data == null;
 	}
 	
 	public boolean isLeaf() {
@@ -97,7 +97,7 @@ public class BinaryTree<T> {
 			aux = cola.dequeue();
 			if(aux != null) {
 				if (nivel >= n && nivel <= m)
-					System.out.println(aux.data.toString());
+					System.out.print(aux.data.toString() + " | ");
 				if(aux.hasLeftChild()) {
 					cola.enqueue(aux.leftChild);
 				}
@@ -108,6 +108,7 @@ public class BinaryTree<T> {
 			else {
 				cola.enqueue(null);
 				nivel++;
+				System.out.println();
 			}
 		}
 	}

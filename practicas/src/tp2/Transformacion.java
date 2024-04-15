@@ -3,12 +3,8 @@ package tp2;
 public class Transformacion {
 	
 	public static BinaryTree<Integer> suma(BinaryTree<Integer> a) {
-		int suma = 0;
-		BinaryTree<Integer> nuevo = null;
-		if (!a.isEmpty()) {
-			
-		}
-		return nuevo;
+		recorrido(a);
+		return a;
 	}
 	
 	public static int recorrido(BinaryTree<Integer> a) {
