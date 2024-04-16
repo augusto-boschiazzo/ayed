@@ -1,9 +1,9 @@
 package tp2;
 
-public class ParcialArboles {
+public class Ejercicio7 {
 	private BinaryTree<Integer> arbol;
 	
-	public ParcialArboles(BinaryTree<Integer> arbol) {
+	public Ejercicio7(BinaryTree<Integer> arbol) {
 		this.arbol = arbol;
 	}
 	

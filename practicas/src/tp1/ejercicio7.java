@@ -1,6 +1,5 @@
 package tp1;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,8 +57,8 @@ public class ejercicio7 {
 	public static LinkedList<Integer> combinarOrdenado(LinkedList<Integer> lista1, LinkedList<Integer> lista2){
 		LinkedList<Integer> nueva = new LinkedList<Integer>();
 		while (!lista1.isEmpty() || !lista2.isEmpty()) {
-			int n1 = lista1.pop();
-			int n2 = lista2.pop();
+			lista1.pop();
+			lista2.pop();
 		}
 		return nueva;
 	}

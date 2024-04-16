@@ -1,6 +1,6 @@
 package tp2;
 
-public class Test {
+public class TestEjercicio7 {
 	
 	public static void main(String[] args) {
 		BinaryTree<Integer> arbol = new BinaryTree<Integer>(2);
@@ -24,7 +24,7 @@ public class Test {
 		a19.addRightChild(a4);
 		BinaryTree<Integer> a18 = new BinaryTree<Integer>(18);
 		a4.addLeftChild(a18);
-		ParcialArboles test = new ParcialArboles(arbol);
+		Ejercicio7 test = new Ejercicio7(arbol);
 		System.out.println("num = 7 " + test.isLeftTree(7) + " num = 2 " + test.isLeftTree(2) + " num = -5 " + test.isLeftTree(-5) + " num = 19 " + test.isLeftTree(19) + " num = -3 " + test.isLeftTree(-3));
 	}
 	
