@@ -1,5 +1,6 @@
 package tp3;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class GeneralTree<T> {
@@ -52,15 +53,58 @@ public class GeneralTree<T> {
 	}
 	
 	public int altura() {
-		int altura = 0;
-		
-		return altura;
+		int max = -1;
+		if (!this.isEmpty())
+			alturaRecur(this, 1, max);
+		return max;
 	}
 	
-	private int alturaRecur(GeneralTree<T> arbol) {
-		int altura = 0;
-		
-		return altura;
+	private void alturaRecur(GeneralTree<T> arbol, int altura, int max) {
+		if (altura > max) {
+			max = altura;
+		}
+		Iterator<GeneralTree<T>> it = children.iterator();
+		if (it.hasNext()) {
+			alturaRecur(it.next(), altura+1, max);
+		}
+	}
+	
+	public int nivel(T dato) {
+		int nivel = 0;
+		if (!this.isEmpty())
+			nivel = nivelRecur(this, dato, nivel);
+		return nivel;
+	}
+	
+	private int nivelRecur(GeneralTree<T> arbol, T dato, int nivel) {
+		int encontrado = 0;
+		if (arbol.getData().equals(dato))
+			encontrado = nivel;
+		else {
+			Iterator<GeneralTree<T>> it = children.iterator();
+			while (it.hasNext() && encontrado == 0) {
+				encontrado = nivelRecur(it.next(), dato, nivel+1);
+			}
+		}
+		return encontrado;
+	}
+	
+	public int ancho() {
+		int ancho = 0;
+		if (!this.isEmpty())
+			ancho(this, ancho);
+		return ancho;
+	}
+	
+	private void ancho(GeneralTree<T> arbol, int max) {
+		int ancho = 0;
+		Iterator<GeneralTree<T>> it = children.iterator();
+		while (it.hasNext()) {
+			ancho++;
+			ancho(it.next(), max);
+		}
+		if (ancho > max)
+			max = ancho;
 	}
 	
 
