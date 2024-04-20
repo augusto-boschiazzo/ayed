@@ -10,7 +10,7 @@ public class Ejercicio9 {
 		return nuevo;
 	}
 	
-	public BinaryTree<Numeros> recur(BinaryTree<Integer> arbol, int suma, int resta) {
+	private BinaryTree<Numeros> recur(BinaryTree<Integer> arbol, int suma, int resta) {
 		int dato = arbol.getData();
 		Numeros n = new Numeros(suma + dato,  dato - resta);
 		BinaryTree<Numeros> nuevo = new BinaryTree<Numeros>(n);

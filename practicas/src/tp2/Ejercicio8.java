@@ -14,7 +14,7 @@ public class Ejercicio8 {
 		return aux;
 	}
 	
-	public boolean prefijoRecur(BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2) {
+	private boolean prefijoRecur(BinaryTree<Integer> arbol1, BinaryTree<Integer> arbol2) {
 		boolean aux = arbol1.getData() == arbol2.getData();
 		if (aux && arbol1.hasLeftChild()) {
 			if (arbol2.hasLeftChild()) {

@@ -18,7 +18,7 @@ public class Ejercicio7 {
 		return aux;
 	}
 	
-	public BinaryTree<Integer> buscarSubArbol(BinaryTree<Integer> arbol, int num) {
+	private BinaryTree<Integer> buscarSubArbol(BinaryTree<Integer> arbol, int num) {
 		BinaryTree<Integer> encontrado = null;
 		if (!arbol.isEmpty()) {
 			if (arbol.getData().equals(num)) {
@@ -36,7 +36,7 @@ public class Ejercicio7 {
 		return encontrado;
 	}
 	
-	public boolean masHijosIzq(BinaryTree<Integer> arbol) {
+	private boolean masHijosIzq(BinaryTree<Integer> arbol) {
 		int hIzq = -1;
 		int hDer = -1;
 		if (arbol.hasLeftChild()) {
@@ -48,7 +48,7 @@ public class Ejercicio7 {
 		return hIzq > hDer;
 	}
 	
-	public int contarHijo(BinaryTree<Integer> arbol) {
+	private int contarHijo(BinaryTree<Integer> arbol) {
 		int cant = 0;
 		boolean hijoIzq = arbol.hasLeftChild();
 		if(hijoIzq) {
