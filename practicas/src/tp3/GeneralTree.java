@@ -9,6 +9,7 @@ public class GeneralTree<T> {
 	
 	public GeneralTree (T data) {
 		this.data = data;
+		children = new LinkedList<GeneralTree<T>>();
 	}
 	
 	public GeneralTree (T data, LinkedList<GeneralTree<T>> children) {
@@ -105,6 +106,32 @@ public class GeneralTree<T> {
 		}
 		if (ancho > max)
 			max = ancho;
+	}
+	
+	public boolean esAncestro(T a, T b) {
+		if (!this.isEmpty()) {
+			GeneralTree<T> sub = this.buscarSubArbol(a);
+			if (sub != null) {
+				return sub.buscarSubArbol(b) != null;
+			}
+		}
+		return false;
+	}
+	
+	public GeneralTree<T> buscarSubArbol(T e) {
+		GeneralTree<T> arbol = null;
+		if (this.getData().equals(e)) {
+			arbol = this;
+		}
+		else {
+			if (this.hasChildren() && arbol == null) {
+				Iterator<GeneralTree<T>> it = this.getChildren().iterator();
+				while (it.hasNext()) {
+					it.next().buscarSubArbol(e);
+				}
+			}
+		}
+		return arbol;
 	}
 	
 
