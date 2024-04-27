@@ -25,7 +25,7 @@ public class Caminos {
 		if(arbol.hasChildren()) {
 			Iterator<GeneralTree<Integer>> it = arbol.getChildren().iterator();
 			while(it.hasNext()) {
-				caminoRecur(it.next(), max, prof +1, lista);
+				caminoRecur(it.next(), max, prof++, lista);
 			}
 		}
 		if (prof < max) {
