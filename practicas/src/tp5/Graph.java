@@ -13,7 +13,7 @@ public interface Graph<T> {
 	public int weight(Vertex<T> origin, Vertex<T> destination);
 	public boolean isEmpty();
 	public List<Vertex<T>> getVertices();
-	public List<Edge<T>> getEdges();
+	public List<Edge<T>> getEdge(Vertex<T> vertex);
 	public Vertex<T> getVertex(int position);
 	public int getSize();
 	
