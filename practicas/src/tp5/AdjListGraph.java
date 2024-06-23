@@ -1,4 +1,4 @@
-package tp5;
+		package tp5;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -84,7 +84,7 @@ public class AdjListGraph<T> implements Graph<T> {
 	}
 	
 	public boolean isEmpty() {
-		return this.vertices.isEmpty();
+		return this != null || this.vertices.isEmpty();
 	}
 	
 	public List<Vertex<T>> getVertices() {
@@ -93,7 +93,7 @@ public class AdjListGraph<T> implements Graph<T> {
 	
 	public List<Edge<T>> getEdge(Vertex<T> vertex) {
 		if (this.belongs(vertex)) {
-			return new ArrayList<>(((AdjListVertex<T>) vertex).getEdges());
+			return ((AdjListVertex<T>) vertex).getEdges();
 		}
 		return null;
 	}

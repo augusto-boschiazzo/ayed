@@ -43,11 +43,11 @@ public class AdjListVertex<T> implements Vertex<T> {
 		position--;
 	}
 	
-	public void connect(Vertex<T> vertex) {
+	protected void connect(Vertex<T> vertex) {
 		this.connect(vertex, 1);
 	}
 	
-	public void connect(Vertex<T> destination, int weight) {
+	protected void connect(Vertex<T> destination, int weight) {
 		Edge<T> edge = this.getEdge(destination);
 		if (edge == null)
 			this.edges.add(new AdjListEdge<>(destination, weight));
