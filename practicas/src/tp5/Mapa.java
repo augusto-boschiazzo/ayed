@@ -79,22 +79,82 @@ public class Mapa {
 	}
 	
 	public List<String> caminoMasCorto(String origen, String destino) {
+		Minimo min = new Minimo();
+		if (!mapaCiudades.isEmpty()) {
+			boolean[] visitado = new boolean[mapaCiudades.getSize()];
+			inicializarVisitados(visitado);
+			Vertex<String> ciudad = mapaCiudades.search(origen);
+			if (ciudad != null) {
+				List<String> lista = new LinkedList<String>();
+				dfsCorto(ciudad.getPosition(), lista, visitado, destino, min, 0);
+			}
+		}
+		return min.getLista();
+	}
+	
+	private void dfsCorto(int i, List<String> lista, boolean[] visitado, String destino, Minimo min, int peso) {
+		Vertex<String> v = mapaCiudades.getVertex(i);
+		String ciudad = v.getData();
+		lista.add(ciudad);
+		if (ciudad.equals(destino)) {
+			if (peso < min.getMin()) {
+				min.setMin(peso);
+				min.setLista(lista);
+			}
+		}
+		else {
+			visitado[i] = true;
+			Iterator<Edge<String>> it = mapaCiudades.getEdge(v).iterator();
+			while (it.hasNext()) {
+				Edge<String> edge = it.next();
+				int j = edge.getTarget().getPosition();
+				dfsCorto(j, lista, visitado, destino, min, peso + edge.getWeight());
+			}
+		}
+		lista.remove(lista.size() -1);
+	}
+	
+	public List<String> caminoSinCargar(String origen, String destino, int tanqueAuto) {
 		List<String> lista = new LinkedList<String>();
 		if (!mapaCiudades.isEmpty()) {
 			boolean[] visitado = new boolean[mapaCiudades.getSize()];
 			inicializarVisitados(visitado);
 			Vertex<String> ciudad = mapaCiudades.search(origen);
 			if (ciudad != null) {
-				dijkstra(ciudad.getPosition(), destino, lista);
+				dfsSinCargar(ciudad.getPosition(), lista, visitado, destino, tanqueAuto, 0);
 			}
 		}
 		return lista;
 	}
 	
-	private void dijkstra(int i, String ciudad, List<String> listaMin) {
-		List<String> listaAux = new LinkedList<String>();
-		
+	private boolean dfsSinCargar(int i, List<String> lista, boolean[] visitado, String destino, int tanqueAuto, int peso) {
+		Vertex<String> v = mapaCiudades.getVertex(i);
+		String ciudad = v.getData();
+		lista.add(ciudad);
+		boolean encontrado = false;
+		if (ciudad.equals(destino)) {
+			encontrado = true;
+		}
+		else {
+			Iterator<Edge<String>> it = mapaCiudades.getEdge(v).iterator();
+			visitado[i] = true;
+			while (it.hasNext() && !encontrado) {
+				Edge<String> edge = it.next();
+				peso += edge.getWeight();
+				int j = edge.getTarget().getPosition();
+				if (peso <= tanqueAuto) {
+					encontrado = dfsSinCargar(j, lista, visitado, destino, tanqueAuto, peso);
+				}
+				peso -= edge.getWeight();
+			}
+		}
+		if (!encontrado)
+			lista.remove(lista.size() -1);
+		return encontrado;
 	}
+	
+	
+	
 	
 	private void inicializarVisitados(boolean[] visitados) {
 		for (int i = 0; i < visitados.length; i++) {
