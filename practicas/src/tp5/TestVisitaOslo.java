@@ -3,7 +3,7 @@ package tp5;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TestVisitaOsolo {
+public class TestVisitaOslo {
 	
 	public static void main(String[] args) {
 		Graph<String> grafo = new AdjListGraph<String>();
