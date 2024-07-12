@@ -11,34 +11,39 @@ import java.util.Iterator;
 
 public class Banco {
 	
-	public static List<Persona> jubiladosSinCobrar(Graph<Persona> grafo, Persona empleado, int distanciaMax) {
+	public static List<Persona> jubiladosSinCobrar(Graph<Persona> grafo, Persona empleado, int distanciaMax, int limite) {
 		List<Persona> lista = new LinkedList<Persona>();
 		if (!grafo.isEmpty()) {
 			Vertex<Persona> v = grafo.search(empleado);
 			if (v != null) {
-				bfs(v.getPosition(), grafo, lista, distanciaMax);
+				bfs(v.getPosition(), grafo, lista, distanciaMax, limite);
 			}
 		}
 		return lista;
 	}
 	
-	private static void bfs(int i, Graph<Persona> grafo, List<Persona> lista, int distanciaMax) {
+	private static void bfs(int i, Graph<Persona> grafo, List<Persona> lista, int limite, int distanciaMax) {
 		boolean[] visitados = new boolean[grafo.getSize()];
 		inicializarVisitados(visitados, grafo);
 		int distancia = 0, cant = 0;
 		Queue<Vertex<Persona>> q = new Queue<Vertex<Persona>>();
 		q.enqueue(grafo.getVertex(i));
 		q.enqueue(null);
-		while(!q.isEmpty() && cant <= 40 && distancia < distanciaMax) {
+		visitados[i] = true;
+		while(!q.isEmpty() && cant < limite && distancia < distanciaMax) {
 			Vertex<Persona> v = q.dequeue();
 			if (v != null) {
-				visitados[v.getPosition()] = true;
 				Iterator<Edge<Persona>> it = grafo.getEdge(v).iterator();
-				while (it.hasNext() && cant <= 40) {
+				while (it.hasNext() && cant < limite) {
 					Vertex<Persona> ady = it.next().getTarget();
+					q.enqueue(ady);
+					visitados[ady.getPosition()] = true;
 					if (ady.getData() instanceof Jubilado) {
-						lista.add(ady.getData());
-						cant++;
+						Jubilado j = (Jubilado)ady;
+						if(!j.getCobro()) {
+							lista.add(ady.getData());
+							cant++;
+						}
 					}
 				}
 			}
@@ -51,14 +56,7 @@ public class Banco {
 	
 	private static void inicializarVisitados(boolean[] visitados, Graph<Persona> grafo) {
 		for (int i = 0; i < visitados.length; i++) {
-			Persona p = grafo.getVertex(i).getData();
-			if (p instanceof Jubilado) {
-				Jubilado j = (Jubilado)p;
-				visitados[i] = j.getCobro();
-			}
-			else {
-				visitados[i] = false;
-			}
+			visitados[i] = false;
 		}
 	}
 	
