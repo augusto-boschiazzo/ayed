@@ -55,5 +55,51 @@ public class Parcial {
 		}
 	}
 	
+	public List<String> resolver(Graph<String> ciudades, String origen, String destino, List<String> pasandoPor) {
+		List<String> lista = new LinkedList<String>();
+		if(!ciudades.isEmpty()) {
+			Vertex<String> ciudad = ciudades.search(origen);
+			if(ciudad != null) {
+				boolean[] visitados = new boolean[ciudades.getSize()];
+				inicializarVisitados(visitados);
+				dfs(ciudad.getPosition(), ciudades, lista, destino, visitados, pasandoPor);
+			}
+		}
+		return lista;
+	}
+	
+	private boolean dfs(int i, Graph<String> ciudades, List<String> lista, String destino, boolean[] visitados, List<String> pasandoPor) {
+		boolean encontrado = false;
+		Vertex<String> act = ciudades.getVertex(i);
+		String ciudad = act.getData();
+		lista.add(ciudad);
+		if (ciudad.equals(destino)) {
+			if (listaContieneLista(lista, pasandoPor)) {
+				encontrado = true;
+			}
+		}
+		else {
+			visitados[i] = true;
+			Iterator<Edge<String>> it = ciudades.getEdge(act).iterator();
+			while(it.hasNext() && !encontrado) {
+				Vertex<String> ady = it.next().getTarget();
+				int j = ady.getPosition();
+				dfs(j, ciudades, lista, destino, visitados, pasandoPor);
+			}
+		}
+		if (!encontrado) {
+			lista.remove(lista.size() -1);
+		}
+		return encontrado;
+	}
+	
+	private boolean listaContieneLista(List<String> camino, List<String> pasandoPor) {
+		boolean aux = true;
+		for(String s: pasandoPor) {
+			aux = aux && camino.contains(s);
+		}
+		return aux;
+	}
+	
 	
 }
